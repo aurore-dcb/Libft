@@ -29,4 +29,4 @@ char *ft_strtrim(char const *s1, char const *set)
 		--end;
 	ret = ft_substr(start, 0, end - start);
 	return (ret);
-}g
+}
