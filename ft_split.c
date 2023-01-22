@@ -1,73 +1,73 @@
 #include "libft.h"
 
-static size_t nb_mots(const char *s, char c)
+static int	nb_mots(const char *str, char c)
 {
-    size_t i;
-    size_t nb;
+	int	mots;
+	int	sep;
 
-    i = 0;
-    nb = 0;
-    if (s[i] != c)
-    {
-        nb++;
-        i++;
-    }
-    while (s[i])
-    {
-        while (s[i] && s[i]!= c)
-        {
-            if (s[i - 1] == c)
-                nb++;
-            i++;
-        }
-        while (s[i] && s[i]== c)
-            i++;
-    }
-    return (nb);
+	mots = 0;
+	sep = 1;
+	while (*str)
+	{
+		if (*str == c)
+			sep = 1;
+		else if (sep == 1)
+		{
+			mots++;
+			sep = 0;
+		}
+		str++;
+	}
+	return (mots);
 }
 
 static size_t nb_lettre(const char *s, char c)
 {
     size_t i;
-    size_t nb;
 
     i = 0;
-    nb = 0;
     while (s[i] && s[i] != c)
-    {
-        nb++;
         i++;
-    }
-    return (nb);
+    return (i);
 }
 
-char **ft_split(char const *s, char c)
+static char **error(char **res, int i)
 {
-    size_t i;
-    size_t j;
-    size_t index;
-    char **res;
-
-    res = malloc(sizeof(char *) * nb_mots(s, c) + 1);
-    if (!res)
-        return (NULL);
-    i = 0;
-    index = 0;
-    while (s[i])
+    while (i < 0)
     {
-        if (s[i] != c)
-        {
-            j = 0;
-            res[index] = malloc(sizeof(char) * nb_lettre(s, c) + 1);
-            while (s[i] && s[i] != c)
-                res[index][j++] = s[i++];
-            res[index++][j++] = 0;
-        }
-        while (s[i] && s[i] == c)
-            i++;
+        free(res[i]);
+        i--;
     }
-    res[index] = 0;
-    return (res);
+    free(res);
+    return (NULL);
+}
+
+char	**ft_split(const char *str, char c)
+{
+	char	**tab;
+	int		i;
+	int		j;
+
+	if (str == NULL)
+		return (NULL);
+	tab = malloc(sizeof(char *) * (nb_mots(str, c) + 1));
+	if (tab == NULL)
+		return (NULL);
+	i = 0;
+	while (nb_mots(str, c))
+	{
+		while (*str && *str == c)
+			str++;
+		tab[i] = malloc(sizeof(char) * nb_lettre(str, c) + 1);
+		if (!tab[i])
+			return (error(tab, i));
+		j = 0;
+		while (*str && *str != c)
+			tab[i][j++] = *str++;
+		tab[i++][j] = '\0';
+	}
+	tab[i] = 0;
+	return (tab);
 }
 
 /*#include <stdio.h>
