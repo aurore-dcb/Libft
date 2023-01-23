@@ -15,9 +15,7 @@ void ft_lstadd_back(t_list **lst, t_list *new)
         *lst = new;
 }
 
-/*#include <stdio.h>
-
-int main(void)
+/*int main(void)
 {
     t_list elem1, elem2, elem3, *begin;
 

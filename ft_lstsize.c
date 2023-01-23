@@ -13,9 +13,7 @@ int ft_lstsize(t_list *lst)
     return (i);
 }
 
-/*#include <stdio.h>
-
-int main(void)
+/*int main(void)
 {
     t_list elem1, elem2, elem3, *begin;
 
