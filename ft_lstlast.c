@@ -1,25 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/02 11:28:10 by aducobu           #+#    #+#             */
+/*   Updated: 2023/05/02 11:28:31 by aducobu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-t_list *ft_lstlast(t_list *lst)
+t_list	*ft_lstlast(t_list *lst)
 {
-    if (!lst)
-        return (NULL);
-    while(lst->next)
-        lst = lst->next;
-    return (lst);
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }
-
-/*int main(void)
-{
-    t_list elem1, elem2, elem3, *begin;
-
-    begin = &elem1;
-	elem1.next = &elem2;
-	elem2.next = &elem3;
-	elem3.next = 0;
-
-	elem1.content = "toto";
-	elem2.content = "tata";
-	elem3.content = "tutu";
-    printf("%s\n", ft_lstlast(begin)->content);
-}*/
